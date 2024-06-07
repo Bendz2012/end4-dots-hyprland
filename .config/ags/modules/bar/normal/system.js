@@ -78,7 +78,7 @@ const Utilities = () => Box({
         }),
         UtilButton({
             name: 'Toggle on-screen keyboard', icon: 'keyboard', onClicked: () => {
-                App.toggleWindow('osk');
+                toggleWindowOnAllMonitors('osk');
             }
         }),
     ]
@@ -99,7 +99,7 @@ const BarBattery = () => Box({
         Label({
             className: 'txt-smallie',
             setup: (self) => self.hook(Battery, label => {
-                label.label = `${Battery.percent}%`;
+                label.label = `${Number.parseFloat(Battery.percent.toFixed(1))}%`;
             }),
         }),
         Overlay({

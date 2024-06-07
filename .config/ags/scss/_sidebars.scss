@@ -59,25 +59,11 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-iconbutton:hover,
 .sidebar-iconbutton:focus {
-    background-color: $hovercolor;
+    background-color: $layer1Hover;
 }
 
 .sidebar-iconbutton:active {
-    background-color: $activecolor;
-}
-
-.sidebar-button {
-    @include element_decel;
-    padding: 0rem $rounding_small;
-}
-
-.sidebar-button:hover,
-.sidebar-button:focus {
-    background-color: $hovercolor;
-}
-
-.sidebar-button:active {
-    background-color: $activecolor;
+    background-color: $layer1Active;
 }
 
 .sidebar-button-active {
@@ -87,11 +73,11 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-button-active:hover,
 .sidebar-button-active:focus {
-    background-color: mix($primary, $hovercolor, 70%);
+    background-color: mix($primary, $layer1Hover, 70%);
 }
 
 .sidebar-button-active:active {
-    background-color: mix($primary, $hovercolor, 40%);
+    background-color: mix($primary, $layer1Active, 40%);
 }
 
 .sidebar-buttons-separator {
@@ -111,11 +97,11 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-navrail-btn:hover>box>label:first-child,
 .sidebar-navrail-btn:focus>box>label:first-child {
-    background-color: $hovercolor;
+    background-color: $layer1Hover;
 }
 
 .sidebar-navrail-btn:active>box>label:first-child {
-    background-color: $activecolor;
+    background-color: $layer1Active;
 }
 
 .sidebar-navrail-btn-active>box>label:first-child {
@@ -125,8 +111,8 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-navrail-btn-active:hover>box>label:first-child,
 .sidebar-navrail-btn-active:focus>box>label:first-child {
-    background-color: mix($secondaryContainer, $hovercolor, 90%);
-    color: mix($onSecondaryContainer, $hovercolor, 90%);
+    background-color: mix($secondaryContainer, $layer1Hover, 90%);
+    color: mix($onSecondaryContainer, $layer1Hover, 90%);
 }
 
 .sidebar-sysinfo-grouppad {
@@ -268,7 +254,22 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 }
 
 .sidebar-todo-item {
-    padding-right: 0.545rem;
+    @include small-rounding;
+    margin-right: 0.545rem;
+    // padding: 0.341rem;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-todo-txt {
+    margin: 0.682rem;
+    margin-bottom: 0rem;
+}
+
+.sidebar-todo-actions {
+    margin: 0.341rem;
+    margin-top: 0rem;
+    margin-right: 0rem;
 }
 
 .sidebar-todo-item-action {
@@ -280,11 +281,11 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-todo-item-action:hover,
 .sidebar-todo-item-action:focus {
-    background-color: $hovercolor;
+    background-color: $layer2Hover;
 }
 
 .sidebar-todo-item-action:active {
-    background-color: $activecolor;
+    background-color: $layer2Active;
 }
 
 .sidebar-todo-crosser {
@@ -384,12 +385,17 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 .sidebar-module-btn-arrow {
     @include full-rounding;
     @include icon-material;
-    background-color: $surfaceContainerHigh;
+    background-color: $layer2;
     min-width: 1.705rem;
     min-height: 1.705rem;
 
-    &:hover {
-        background-color: $hovercolor;
+    &:hover,
+    &:focus {
+        background-color: $layer2Hover;
+    }
+
+    &:active {
+        background-color: $layer2Active;
     }
 }
 
@@ -400,12 +406,13 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
     min-width: 1.705rem;
     min-height: 1.705rem;
 
-    &:hover {
-        background-color: $hovercolor;
+    &:hover,
+    &:focus {
+        background-color: $layer1Hover;
     }
 
     &:active {
-        background-color: $activecolor;
+        background-color: $layer1Active;
     }
 }
 
@@ -539,11 +546,57 @@ $colorpicker_rounding: 0.341rem;
     background-color: mix($primary, $hovercolor, 40%);
 }
 
+.sidebar-chat-messagearea {
+    margin: 0.341rem;
+}
+
 .sidebar-chat-message {
-    margin: 0.682rem;
     @include normal-rounding;
     @include group-padding;
     background-color: $layer1;
+}
+
+$skeleton-accent: mix($secondary, $onSecondary, 50%);
+
+@keyframes sidebar-chat-message-skeletonline-anim {
+    0% {
+        background-position: 175% 0%;
+    }
+
+    100% {
+        background-position: 50% 0%;
+    }
+}
+
+.sidebar-chat-message-skeletonline {
+    border-radius: $rounding_verysmall;
+    min-height: 1.364rem;
+    background-color: $layer2;
+}
+
+.sidebar-chat-message-skeletonline-offset0 {
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $skeleton-accent 25%, $layer3 50%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
+}
+
+.sidebar-chat-message-skeletonline-offset1 {
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $layer3 50%, $skeleton-accent 75%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
+}
+
+.sidebar-chat-message-skeletonline-offset2 {
+    margin-right: 5.795rem;
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $layer3 25%, $skeleton-accent 50%, $layer3 75%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
 }
 
 .sidebar-chat-indicator {
@@ -861,6 +914,13 @@ $waifu_image_overlay_transparency: 0.7;
     margin: 0rem 0.682rem;
 }
 
+.sidebar-volmixer-deviceselector {
+    @include small-rounding;
+    padding: 0.477rem 0.682rem;
+    background-color: $surfaceContainerHigh;
+    color: $onSurfaceVariant;
+}
+
 .sidebar-bluetooth-device {
     padding: 0.682rem;
     @include normal-rounding;
@@ -914,4 +974,22 @@ $waifu_image_overlay_transparency: 0.7;
     background-color: $layer1;
     color: $onLayer1;
     padding: 0.682rem;
+}
+
+.sidebar-centermodules-bottombar-button {
+    @include full-rounding;
+    @include element_decel;
+    min-width: 6.818rem;
+    min-height: 2.25rem;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-centermodules-bottombar-button:hover,
+.sidebar-centermodules-bottombar-button:focus {
+    background-color: $layer2Hover;
+}
+
+.sidebar-centermodules-bottombar-button:active {
+    background-color: $layer2Active;
 }
